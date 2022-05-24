@@ -39,7 +39,7 @@ export async function logout() {
 
 export async function getClasses() {
     const response = await client.from('class').select('*, participants(*)');
-    return checkError (response);
+    return checkError(response);
 }
 
 export async function createParticipant(participant) {
