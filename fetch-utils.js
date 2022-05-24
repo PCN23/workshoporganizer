@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://rtlscqxivjinblfrlgls.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ0bHNjcXhpdmppbmJsZnJsZ2xzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTIzMDU0MTMsImV4cCI6MTk2Nzg4MTQxM30.00XIP2vqbUttvWfraYlPerWhL6U91pxWMD114J1FM8I';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -37,6 +37,42 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-// function checkError({ data, error }) {
-//     return error ? console.error(error) : data;
-// }
+export async function getClasses() {
+    const response = await client.from('class').select('*, participants(*)');
+    return checkError (response);
+}
+
+export async function createParticipant(participant) {
+    const response = await client.from('participants').insert(participant);
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+    return checkError(response);
+}
+
+export async function deleteParticipant(id){
+    const response = await client.from('participants').delete().match({ id: id });
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+    return checkError(response);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function checkError({ data, error }) {
+    return error ? console.error(error) : data;
+}
