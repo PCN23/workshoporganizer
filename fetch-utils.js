@@ -64,15 +64,6 @@ export async function deleteParticipant(id){
 
 
 
-
-
-
-
-
-
-
-
-
 function checkError({ data, error }) {
     return error ? console.error(error) : data;
 }
