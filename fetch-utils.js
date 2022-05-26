@@ -39,6 +39,11 @@ export async function logout() {
 
 export async function getClasses() {
     const response = await client.from('class').select('*, participants(*)');
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
     return checkError(response);
 }
 

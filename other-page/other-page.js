@@ -11,7 +11,7 @@ logoutButton.addEventListener('click', () => {
 async function displayCars() {
     const classes = await getClasses();
     console.log(classes);
-    classes.textContent = '';
+    carBrands.textContent = '';
 
     for (let carro of classes) {
         const vehicleEl = document.createElement('div');
